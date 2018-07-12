@@ -62,7 +62,14 @@ function startServer (callback) {
 
 		// Handle response
 		server.use(function (err, req, res, next) {
-			res.end();
+			if (err) {
+				if (err.status) res.status(err.status).json({message: err.message});
+				else res.sendStatus(500);
+			} else {
+				if (!res.body) res.body = {};
+				res.body.message = "Success";
+				res.status(200).json(res.body);
+			}
 		});
 
 		// Callback upon success
