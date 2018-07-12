@@ -57,6 +57,7 @@ function startServer (callback) {
         });
 
 		// Initialize interfaces
+		require('./sms/routes')(server);
 		require('./mississippi/routes')(server);
 
 		// Callback upon success
