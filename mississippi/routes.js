@@ -13,7 +13,7 @@ module.exports = function (server) {
 	server.post(base+"receive", function (req, res, next) {
 		Async.waterfall([
 			function (callback) {
-				console.log(req);
+				console.log(req.body);
 				callback();
 			},
 		], function (err) {
