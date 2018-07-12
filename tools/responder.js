@@ -1,4 +1,7 @@
 
+// Include dependencies
+const TwilioResponser = require('twilio').twiml.MessagingResponse;
+
 // Responder: custom Express responses
 module.exports = {
 
@@ -10,13 +13,18 @@ module.exports = {
     },
 
     twilioSuccess: function (res) {
-        res.sendStatus(200);
+        let responder = new TwilioResponser();
+        let message = responder.message("OK!");
+        res.writeHead(200, { 'Content-Type': 'text/xml' });
+  		res.end(message);
     },
 
     twilioError: function (message) {
+        let responder = new TwilioResponser();
+        let twilioMessage = responder.message(message);
         return {
             twilioError: true,
-            message: message.substr(0, 150),
+            message: twilioMessage,
         };
     },
 

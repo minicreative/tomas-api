@@ -40,7 +40,7 @@ module.exports = function (server) {
 			},
 
 		], function (err) {
-			if (err) next(Responder.twilioError(err));
+			if (err) next(err);
 			else Responder.twilioSuccess(res);
 		})
 	})
