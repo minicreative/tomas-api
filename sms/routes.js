@@ -16,21 +16,21 @@ module.exports = function (server) {
 	server.post(base+"receive", function (req, res, next) {
 
 		// Check if request has body
-		if (req.body === undefined) return next(Responder.twilioError("Missing parameters"));
+		if (req.body === undefined) return next(Responder.twilioMessage("Missing parameters"));
 
 		// Initialize variables from request
 		let message = req.body.Body;
 		let sender = req.body.From;
 
 		// Check if sender exists
-		if (sender === undefined || message === undefined) return next(Responder.twilioError("Missing parameters"));
+		if (sender === undefined || message === undefined) return next(Responder.twilioMessage("Missing parameters"));
 
 		// Verify sender
-		if (!_.includes(Config.authorizedNumbers, sender)) return next(Responder.twilioError("Not authorized"));
+		if (!_.includes(Config.authorizedNumbers, sender)) return next(Responder.twilioMessage("Not authorized"));
 
 		// Verify command
 		let command = message.split(" ")[0];
-		if (!SMSTools.isValidCommand(command)) return next(Responder.twilioError("Invalid command"));
+		if (!SMSTools.isValidCommand(command)) return next(Responder.twilioMessage("Invalid command"));
 
 		// Async
 		Async.waterfall([
@@ -40,7 +40,7 @@ module.exports = function (server) {
 			},
 
 		], function (err) {
-			if (err) next(err);
+			if (err) next(Responder.twilioError());
 			else Responder.twilioSuccess(res);
 		})
 	})

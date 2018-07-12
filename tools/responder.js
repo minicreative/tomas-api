@@ -16,16 +16,20 @@ module.exports = {
         let responder = new TwilioResponser();
         let message = responder.message("OK!");
         res.writeHead(200, { 'Content-Type': 'text/xml' });
-  		res.end(message);
+  		res.end(message.toString());
     },
 
-    twilioError: function (message) {
+    twilioMessage: function (message) {
         let responder = new TwilioResponser();
         let twilioMessage = responder.message(message);
         return {
             twilioError: true,
-            message: twilioMessage,
+            message: twilioMessage.toString(),
         };
+    },
+
+    twilioError: function (message) {
+        return this.twilioMessage("Server error");
     },
 
     userError: function (message) {
