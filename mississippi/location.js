@@ -48,4 +48,22 @@ module.exports = {
             next(err);
         });
     },
+
+    getLatest: function (next) {
+        Location
+            .findOne()
+            .sort('-time')
+            .exec(function(err, location) {
+                next(err, location);
+            });
+    },
+
+    getAll: function (next) {
+        Location
+            .find()
+            .sort('-time')
+            .exec(function(err, locations) {
+                next(err, locations);
+            });
+    },
 };
