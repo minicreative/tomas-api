@@ -1,2 +1,2 @@
 # Tomas' API
-## Various experimental endpoints
+Various experimental endpoints
