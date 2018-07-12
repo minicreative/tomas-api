@@ -16,8 +16,7 @@ module.exports = {
     twilioError: function (message) {
         return {
             twilioError: true,
-            status: 200,
-            message: message.substr(0, 100),
+            message: message.substr(0, 150),
         };
     },
 

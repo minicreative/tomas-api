@@ -65,7 +65,8 @@ function startServer (callback) {
 
 			// Handle errors to send to Twilio
 			if (err.twilioError) {
-				res.status(err.status).send(err.message);
+				res.writeHead(200, { 'Content-Type': 'text/xml' });
+  				res.end(err.message);
 				return;
 			}
 
