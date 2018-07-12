@@ -4,7 +4,6 @@ const base = "/sms/";
 
 // Initialize dependencies
 const Async = require("async");
-const Responder = require("./../tools/responder");
 
 // Attach endpoints to server
 module.exports = function (server) {
@@ -13,21 +12,11 @@ module.exports = function (server) {
 	server.post(base+"receive", function (req, res, next) {
 		Async.waterfall([
 			function (callback) {
-				console.log(req.body);
+				console.log(req.body.Body);
 				callback();
 			},
 		], function (err) {
-			if (err) {
-				res.status(500);
-				res.json({
-					message: "fail"
-				});
-			} else {
-				res.status(200);
-				res.json({
-					message: "dope!"
-				})
-			}
+			next(err);
 		})
 	})
 };

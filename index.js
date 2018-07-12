@@ -60,6 +60,11 @@ function startServer (callback) {
 		require('./sms/routes')(server);
 		require('./mississippi/routes')(server);
 
+		// Handle response
+		server.use(function (err, req, res, next) {
+			res.end();
+		});
+
 		// Callback upon success
 		console.log('Server listening on '+config.IP+':'+config.PORT+'...');
 		callback();
