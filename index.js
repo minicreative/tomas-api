@@ -60,18 +60,6 @@ function startServer (callback) {
 		require('./sms/routes')(server);
 		require('./mississippi/routes')(server);
 
-		// Handle response
-		server.use(function (err, req, res, next) {
-			if (err) {
-				if (err.status) res.status(err.status).json({message: err.message});
-				else res.sendStatus(500);
-			} else {
-				if (!res.body) res.body = {};
-				res.body.message = "Success";
-				res.status(200).json(res.body);
-			}
-		});
-
 		// Callback upon success
 		console.log('Server listening on '+config.IP+':'+config.PORT+'...');
 		callback();
