@@ -15,13 +15,13 @@ module.exports = function (server) {
 
 		// Initialize variables from request
 		let message = req.body.Body;
-		let phone = req.body;
+		let sender = req.body.From;
 
 		Async.waterfall([
 
 			// Verify sender
 			function (callback) {
-				callback();
+				callback("shit this fuckin failed man fuck");
 			},
 
 		], function (err) {
