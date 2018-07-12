@@ -28,7 +28,7 @@ module.exports = {
         if (!details[1] || !details[1].match(NumberFilter)) return next("Bad/missing longitude");
 
         // Get variables
-        let latitute = details[0];
+        let latitude = details[0];
         let longitude = details[1];
         let note = null;
         if (details.length > 2) note = details.splice(0,2).join(" ");
