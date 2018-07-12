@@ -8,7 +8,7 @@ const Schema = Mongoose.Schema;
 const Moment = require("moment");
 
 // Initialize model
-let Location = mongoose.model("Location", new Schema({
+let Location = Mongoose.model("Location", new Schema({
     lat: String,
     long: String,
     time: Number,
@@ -30,7 +30,7 @@ module.exports = {
         let location = new Location({
             lat: details[0],
             long: details[1],
-            time: moment().format("X"),
+            time: Moment().format("X"),
         });
 
         // Save object

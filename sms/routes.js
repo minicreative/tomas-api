@@ -8,6 +8,7 @@ const Async = require("async");
 const Config = require("./../config");
 const Responder = require("./../tools/responder");
 const SMSTools = require("./tools");
+const Mississippi = require("./../mississippi/tools");
 
 // Attach endpoints to server
 module.exports = function (server) {
