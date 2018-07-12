@@ -32,7 +32,7 @@ module.exports = {
         let latitude = details[0];
         let longitude = details[1];
         let note = null;
-        if (details.length > 2) note = details.splice(0,2).join(" ");
+        if (details.length > 2) note = details.splice(2).join(" ");
         let locationDetails = {
             lat: latitude,
             long: longitude,
