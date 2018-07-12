@@ -36,15 +36,18 @@ module.exports = function (server) {
             }
         });
     });
-    
-    // Day: number of days since start
-    server.get(base+"day", function (req, res, next) {
-        let start = Moment("August 6, 2018");
-        let now = Moment();
-        res.body = {
-            day: now.diff(start, "days")
-        };
-        Responder.success(res);
+
+    // Book: latest book
+    server.get(base+"latestBook", function (req, res, next) {
+        Book.getLatest(function(err, book) {
+            if (err) next(Responder.serverError(err));
+            else {
+                res.body = {
+                    book: book
+                };
+                Responder.success(res);
+            }
+        });
     });
 
 };

@@ -23,4 +23,13 @@ module.exports = {
             next(err);
         });
     },
+
+    getLatest: function (next) {
+        Book
+            .findOne()
+            .sort('-time')
+            .exec(function(err, book) {
+                next(err, book);
+            });
+    },
 };
