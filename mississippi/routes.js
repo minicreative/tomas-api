@@ -6,6 +6,7 @@ const base = "/mississippi/";
 const Location = require("./location");
 const Book = require("./book");
 const Responder = require("./../tools/responder");
+const Moment = require("moment");
 
 // Attach endpoints to server
 module.exports = function (server) {
@@ -34,6 +35,14 @@ module.exports = function (server) {
                 Responder.success(res);
             }
         });
-	});
+    });
+    
+    // Day: number of days since start
+    server.get(base+"day", function (req, res, next) {
+        res.body = {
+            day: Moment("August 6, 2018").fromNow()
+        };
+        Responder.success(res);
+    });
 
 };
