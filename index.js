@@ -39,6 +39,9 @@ function startServer (callback) {
 
 	// Setup express plugins
 	server.use(BodyParser.json());
+	server.use(BodyParser.urlencoded({
+		extended: false
+	}));
     server.use(Morgan('dev'));
 
 	// Start listening to port, and then...
