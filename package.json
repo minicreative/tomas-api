@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/minicreative/tomas-api/issues"
   },
-  "homepage": "https://github.com/minicreative/tomas-api#readme"
+  "homepage": "https://github.com/minicreative/tomas-api#readme",
+  "dependencies": {
+    "async": "^2.6.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "moment": "^2.22.2",
+    "mongoose": "^5.2.3",
+    "morgan": "^1.9.0",
+    "npm": "^6.1.0",
+    "twilio": "^3.17.6"
+  }
 }
