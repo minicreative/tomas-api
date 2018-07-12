@@ -12,6 +12,7 @@ let Location = Mongoose.model("Location", new Schema({
     lat: String,
     long: String,
     time: Number,
+    note: String
 }));
 
 // Location Functions
