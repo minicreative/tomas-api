@@ -1,0 +1,19 @@
+{
+  "name": "tomas-api",
+  "version": "1.0.0",
+  "description": "Various server functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minicreative/tomas-api.git"
+  },
+  "author": "Tomas Roy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/minicreative/tomas-api/issues"
+  },
+  "homepage": "https://github.com/minicreative/tomas-api#readme"
+}
