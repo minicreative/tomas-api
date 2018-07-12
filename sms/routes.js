@@ -7,7 +7,7 @@ const _ = require('lodash');
 const Async = require("async");
 const Config = require("./../config");
 const Responder = require("./../tools/responder");
-const SMSTools = require("./smstools");
+const SMSTools = require("./tools");
 
 // Attach endpoints to server
 module.exports = function (server) {
@@ -32,16 +32,13 @@ module.exports = function (server) {
 		let command = message.split(" ")[0];
 		if (!SMSTools.isValidCommand(command)) return next(Responder.twilioMessage("Invalid command"));
 
-		// Async
-		Async.waterfall([
+		// Get detail
+		let detail = message.substr(message.indexOf(" ")+1);
 
-			function (callback) {
-				callback();
-			},
-
-		], function (err) {
-			if (err) next(Responder.twilioError());
+		// Handle command
+		Mississippi.handleCommand(command, detail, function (err) {
+			if (err) next(Responder.twilioMessage(err));
 			else Responder.twilioSuccess(res);
-		})
+		});
 	})
 };

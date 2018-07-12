@@ -2,8 +2,7 @@
 // Initialize static variables
 const validCommands = [
     "Location",
-    "Book",
-    "Feeling"
+    "Book"
 ];
 
 // Initialize dependencies
