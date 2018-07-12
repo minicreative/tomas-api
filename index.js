@@ -60,6 +60,32 @@ function startServer (callback) {
 		require('./sms/routes')(server);
 		require('./mississippi/routes')(server);
 
+		// Handle errors
+		server.use(function (err, req, res, next) {
+
+			// Handle errors to send to Twilio
+			if (err.twilioError) {
+				res.status(err.status).send(err.message);
+				return;
+			}
+
+			// Setup default error parameters
+			let status = 500;
+			let message = "Server error";
+
+			// Override if error is handled
+			if (err.handledError) {
+				status = err.status;
+				message = err.message;
+			}
+
+			// Send response
+			res.status(status).json({message: message});
+
+			// Print error
+			console.log(err);
+		});
+
 		// Callback upon success
 		console.log('Server listening on '+config.IP+':'+config.PORT+'...');
 		callback();
