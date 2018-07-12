@@ -24,14 +24,23 @@ module.exports = {
         let details = detail.split(" ");
 
         // Make sure format is correct
-        for (let i in details) if (!details[i].match(NumberFilter)) next("Bad formatting");
+        if (!details[0] || !details[0].match(NumberFilter)) next("Bad/missing longitude");
+        if (!details[1] || !details[1].match(NumberFilter)) next("Bad/missing longitude");
+
+        // Get variables
+        let latitute = details[0];
+        let longitude = details[1];
+        let note = null;
+        if (details.length > 2) note = details.splice(0,2).join(" ");
+        let locationDetails = {
+            lat: latitude,
+            long: longitude,
+            time: Moment().format("X"),
+        };
+        if (note) locationDetails.note = note;
 
         // Create new object
-        let location = new Location({
-            lat: details[0],
-            long: details[1],
-            time: Moment().format("X"),
-        });
+        let location = new Location(locationDetails);
 
         // Save object
         location.save(function (err) {
