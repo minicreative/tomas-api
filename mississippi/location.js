@@ -24,8 +24,8 @@ module.exports = {
         let details = detail.split(" ");
 
         // Make sure format is correct
-        if (!details[0] || !details[0].match(NumberFilter)) next("Bad/missing longitude");
-        if (!details[1] || !details[1].match(NumberFilter)) next("Bad/missing longitude");
+        if (!details[0] || !details[0].match(NumberFilter)) return next("Bad/missing longitude");
+        if (!details[1] || !details[1].match(NumberFilter)) return next("Bad/missing longitude");
 
         // Get variables
         let latitute = details[0];
