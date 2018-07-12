@@ -1,5 +1,10 @@
 
-const base = "/mississisppi/";
+// Initialize variables
+const base = "/mississippi/";
+
+// Initialize dependencies
+const Async = require("async");
+const Responder = require("./../tools/responder");
 
 // Attach smspost endpoints to server
 module.exports = function (server) {
@@ -7,11 +12,22 @@ module.exports = function (server) {
 	// Receive: handles Twillio messages
 	server.post(base+"receive", function (req, res, next) {
 		Async.waterfall([
-
-
+			function (callback) {
+				console.log(req);
+				callback();
+			},
 		], function (err) {
-			if (err) next(err);
-			else Secretary.respond(req, res);
+			if (err) {
+				res.status(500);
+				res.json({
+					message: "fail"
+				});
+			} else {
+				res.status(200);
+				res.json({
+					message: "dope!"
+				})
+			}
 		})
 	})
 };

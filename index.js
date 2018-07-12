@@ -54,7 +54,7 @@ function startServer (callback) {
         });
 
 		// Initialize interfaces
-		require('./mississippi/routes.js')(server);
+		require('./mississippi/routes')(server);
 
 		// Callback upon success
 		console.log('Server listening on '+config.IP+':'+config.PORT+'...');
