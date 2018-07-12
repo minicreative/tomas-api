@@ -39,8 +39,10 @@ module.exports = function (server) {
     
     // Day: number of days since start
     server.get(base+"day", function (req, res, next) {
+        let start = Moment("August 6, 2018");
+        let now = Moment();
         res.body = {
-            day: Moment("August 6, 2018").fromNow()
+            day: now.diff(start, "days")
         };
         Responder.success(res);
     });
