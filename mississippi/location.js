@@ -6,11 +6,13 @@ let NumberFilter = new RegExp("^[0-9.-]*$");
 const Mongoose = require("mongoose");
 const Schema = Mongoose.Schema;
 const Moment = require("moment");
+const Geocoder = require("geocoder");
 
 // Initialize model
 let Location = Mongoose.model("Location", new Schema({
     lat: String,
     long: String,
+    name: String,
     time: Number,
     note: String
 }));
@@ -28,7 +30,7 @@ module.exports = {
         if (!details[0] || !details[0].match(NumberFilter)) return next("Bad/missing latitude");
         if (!details[1] || !details[1].match(NumberFilter)) return next("Bad/missing longitude");
 
-        // Get variables
+        // Set up object
         let latitude = details[0];
         let longitude = details[1];
         let note = null;
@@ -40,12 +42,32 @@ module.exports = {
         };
         if (note) locationDetails.note = note;
 
-        // Create new object
-        let location = new Location(locationDetails);
+        // Geocode location
+        Geocoder.reverseGeocode(latitude, longitude, function (err, data) {
 
-        // Save object
-        location.save(function (err) {
-            next(err);
+            // Handle error
+            if (err) locationDetails.name = latitude + " / " + longitude;
+
+            // Handle success
+            else {
+                var place = data.results[0];
+                var locationString = "";
+                for (var i in place.address_components) {
+                    if (place.address_components[i].types[0] == "locality") 
+                        locationString += place.address_components[i].long_name;
+                    if (place.address_components[i].types[0] == "administrative_area_level_1")
+                        locationString += ", "+place.address_components[i].short_name;
+                }
+                locationDetails.name = locationString;
+            }
+
+            // Create new object
+            let location = new Location(locationDetails);
+
+            // Save object
+            location.save(function (err) {
+                next(err);
+            });
         });
     },
 
