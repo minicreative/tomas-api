@@ -14,9 +14,9 @@ let Book = Mongoose.model("Book", new Schema({
 module.exports = {
 
     // Add 
-    add: function (title, next) {
+    add: function (detail, next) {
         let book = new Book({
-            title: title,
+            title: detail,
             time: Moment().format("X"),
         });
         book.save(function (err) {
@@ -30,6 +30,15 @@ module.exports = {
             .sort('-time')
             .exec(function(err, book) {
                 next(err, book);
+            });
+    },
+
+    getAll: function (next) {
+        Book
+            .find()
+            .sort('-time')
+            .exec(function(err, books) {
+                next(err, books);
             });
     },
 };
