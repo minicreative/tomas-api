@@ -75,7 +75,7 @@ module.exports = function (server) {
 
         // Clear database
         Database.clearDatabase(function () {
-            Responsder.success(res);
+            Responder.success(res);
         })
     });
 
