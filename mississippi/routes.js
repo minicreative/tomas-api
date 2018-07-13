@@ -68,8 +68,6 @@ module.exports = function (server) {
     // Clear Database
     server.get(base+"clearDatabase", function (req, res, next) {
 
-        console.log(req.query);
-
         // Initialize and check password
         var password = req.query.password;
         if (!password || password != Config.DB_PASSWORD) 
@@ -77,7 +75,7 @@ module.exports = function (server) {
 
         // Clear database
         Database.clearDatabase(function () {
-            next();
+            Responsder.success(res);
         })
     });
 
